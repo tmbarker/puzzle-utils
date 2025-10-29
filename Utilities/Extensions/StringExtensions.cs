@@ -54,4 +54,11 @@ public static class StringExtensions
     {
         return WhitespaceRegex.Replace(input: str, replacement: string.Empty);
     }
+    
+    public static string Reversed(this string s)
+    {
+        var charArray = s.ToCharArray();
+        Array.Reverse(charArray);
+        return new string(charArray);
+    }
 }

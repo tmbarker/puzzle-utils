@@ -78,6 +78,32 @@ public readonly record struct Aabb2D : IEnumerable<Vec2D>
             pos.Y > Min.Y && pos.Y < Max.Y;
     }
 
+    public IEnumerable<Vec2D> EnumerateRow(int row)
+    {
+        if (!ContainsInclusive(pos: Min with { Y = row }))
+        {
+            throw new ArgumentOutOfRangeException(nameof(row));
+        }
+        
+        for (var x = 0; x < Width; x++)
+        {
+            yield return new Vec2D(Min.X + x, row);
+        }
+    }
+    
+    public IEnumerable<Vec2D> EnumerateCol(int col)
+    {
+        if (!ContainsInclusive(pos: Min with { X = col }))
+        {
+            throw new ArgumentOutOfRangeException(nameof(col));
+        }
+        
+        for (var y = 0; y < Height; y++)
+        {
+            yield return new Vec2D(col, Min.Y + y);
+        }
+    }
+    
     public static Aabb2D operator +(Aabb2D lhs, int amount)
     {
         return amount switch
