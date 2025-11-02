@@ -99,13 +99,23 @@ public sealed partial class Grid2D<T> : IEnumerable<Vec2D>
     }
     
     /// <summary>
-    ///     Find the position of the specified <see cref="element"/> in the <see cref="Grid2D{T}"/>
+    ///     Find the first position of the specified <see cref="element"/> in the <see cref="Grid2D{T}"/>
     /// </summary>
     /// <param name="element">The element to find</param>
-    /// <returns>The position of the target <see cref="element"/></returns>
+    /// <returns>The first position of the target <see cref="element"/></returns>
     public Vec2D Find(T element)
     {
-        return this.Single(pos => element != null && element.Equals(this[pos]));
+        return this.First(pos => element != null && element.Equals(this[pos]));
+    }
+
+    /// <summary>
+    ///     Find all positions of the specified <see cref="element"/> in the <see cref="Grid2D{T}"/>
+    /// </summary>
+    /// <param name="element">The element to find</param>
+    /// <returns>All positions that contain the target <see cref="element"/></returns>
+    public IEnumerable<Vec2D> FindAll(T element)
+    {
+        return this.Where(pos => element != null && element.Equals(this[pos]));
     }
     
     /// <summary>
