@@ -1,20 +1,27 @@
 namespace Utilities.Geometry.Euclidean;
 
 /// <summary>
-///     Throw helper for common Vector exceptions.
+///     Helper methods for throwing common Vector exceptions.
 /// </summary>
-/// <typeparam name="TVec">The type of the Vector consumer, used to add detail to exception messages</typeparam>
-public abstract class VecThrowHelper<TVec>
+public static class VecThrowHelper
 {
-    public static Exception InvalidComponent(Axis component)
+    /// <summary>
+    ///     Throws an <see cref="ArgumentException"/> for invalid component access.
+    /// </summary>
+    /// <typeparam name="TVec">The vector type that was accessed</typeparam>
+    /// <param name="component">The invalid component that was accessed</param>
+    public static ArgumentException InvalidComponent<TVec>(Axis component)
     {
-        return new ArgumentException(
-            message: $"The {component} component does not exist in {nameof(TVec)} space");
+        return new ArgumentException($"The {component} component does not exist in {typeof(TVec).Name} space");
     }
 
-    public static Exception InvalidMetric(Metric metric)
+    /// <summary>
+    ///     Throws an <see cref="ArgumentException"/> for an unsupported distance metric.
+    /// </summary>
+    /// <typeparam name="TVec">The vector type the metric was applied to</typeparam>
+    /// <param name="metric">The unsupported metric</param>
+    public static ArgumentException InvalidMetric<TVec>(Metric metric)
     {
-        return new ArgumentException(
-            message: $"The {metric} distance metric is not well defined over {nameof(TVec)} space");
+        return new ArgumentException($"The {metric} distance metric is not well defined over {typeof(TVec).Name} space");
     }
 }

@@ -28,7 +28,7 @@ public readonly record struct Vec3D(int X, int Y, int Z)
         {
             Metric.Chebyshev => ChebyshevDistance(a, b),
             Metric.Taxicab => TaxicabDistance(a, b),
-            _ => throw VecThrowHelper<Vec3D>.InvalidMetric(metric)
+            _ => throw VecThrowHelper.InvalidMetric<Vec3D>(metric)
         };
     }
 
@@ -66,7 +66,7 @@ public readonly record struct Vec3D(int X, int Y, int Z)
         {
             Metric.Chebyshev => GetChebyshevAdjacentSet(),
             Metric.Taxicab => GetTaxicabAdjacentSet(),
-            _ => throw VecThrowHelper<Vec3D>.InvalidMetric(metric)
+            _ => throw VecThrowHelper.InvalidMetric<Vec3D>(metric)
         };
     }
     
@@ -131,7 +131,7 @@ public readonly record struct Vec3D(int X, int Y, int Z)
                 return Z;
             case Axis.W:
             default:
-                throw VecThrowHelper<Vec3D>.InvalidComponent(component);
+                throw VecThrowHelper.InvalidComponent<Vec3D>(component);
         }
     }
     

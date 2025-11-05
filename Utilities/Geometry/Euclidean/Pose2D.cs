@@ -24,6 +24,9 @@ public readonly record struct Pose2D(Vec2D Pos, Vec2D Face)
     {
         return this with { Face = rot.Transform(Face) };
     }
+    
+    public Pose2D TurnRight() => Turn(Rot3D.N90Z);
+    public Pose2D TurnLeft() => Turn(Rot3D.P90Z);
 
     public override string ToString()
     {

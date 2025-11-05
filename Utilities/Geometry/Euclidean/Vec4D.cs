@@ -17,7 +17,7 @@ public readonly record struct Vec4D(int X, int Y, int Z, int W)
         {
             Metric.Chebyshev => ChebyshevDistance(a, b),
             Metric.Taxicab => TaxicabDistance(a, b),
-            _ => throw VecThrowHelper<Vec4D>.InvalidMetric(metric)
+            _ => throw VecThrowHelper.InvalidMetric<Vec4D>(metric)
         };
     }
 
@@ -74,7 +74,7 @@ public readonly record struct Vec4D(int X, int Y, int Z, int W)
         {
             Metric.Chebyshev => GetChebyshevAdjacentSet(),
             Metric.Taxicab => GetTaxicabAdjacentSet(),
-            _ => throw VecThrowHelper<Vec4D>.InvalidMetric(metric)
+            _ => throw VecThrowHelper.InvalidMetric<Vec4D>(metric)
         };
     }
     
@@ -121,7 +121,7 @@ public readonly record struct Vec4D(int X, int Y, int Z, int W)
             Axis.Y => Y,
             Axis.Z => Z,
             Axis.W => W,
-            _ => throw VecThrowHelper<Vec4D>.InvalidComponent(component)
+            _ => throw VecThrowHelper.InvalidComponent<Vec4D>(component)
         };
     }
     

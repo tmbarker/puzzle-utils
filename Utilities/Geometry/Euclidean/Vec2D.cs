@@ -28,7 +28,7 @@ public readonly record struct Vec2D(int X, int Y)
         {
             Metric.Chebyshev => ChebyshevDistance(a, b),
             Metric.Taxicab => TaxicabDistance(a, b),
-            _ => throw VecThrowHelper<Vec2D>.InvalidMetric(metric)
+            _ => throw VecThrowHelper.InvalidMetric<Vec2D>(metric)
         };
     }
 
@@ -98,7 +98,7 @@ public readonly record struct Vec2D(int X, int Y)
         {
             Metric.Chebyshev => GetChebyshevAdjacentSet(),
             Metric.Taxicab => GetTaxicabAdjacentSet(),
-            _ => throw VecThrowHelper<Vec2D>.InvalidMetric(metric)
+            _ => throw VecThrowHelper.InvalidMetric<Vec2D>(metric)
         };
     }
     
@@ -156,7 +156,7 @@ public readonly record struct Vec2D(int X, int Y)
             case Axis.Z:
             case Axis.W:
             default:
-                throw VecThrowHelper<Vec2D>.InvalidComponent(component);
+                throw VecThrowHelper.InvalidComponent<Vec2D>(component);
         }
     }
     

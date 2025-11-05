@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Utilities.Extensions;
 
@@ -23,7 +24,7 @@ public sealed partial class Grid2D<T>
     /// <summary>
     ///     Rotate the grid by the given argument. A positive argument represents a CCW rotation.
     /// </summary>
-    /// <param name="deg">The integral number of degrees to rotate the grid</param>
+    /// <param name="deg">The number of degrees to rotate the grid</param>
     public void Rotate(int deg)
     {
         switch (deg.Modulo(Degrees.P360))
@@ -96,6 +97,7 @@ public sealed partial class Grid2D<T>
     /// </summary>
     private static T[,] TransposeInPlace(T[,] src)
     {
+        Debug.Assert(src.GetLength(dimension: 0) == src.GetLength(dimension: 1));
         for (var i = 0; i < src.GetLength(dimension: 0); i++)
         for (var j = 0; j < i; j++)
         {
@@ -107,7 +109,7 @@ public sealed partial class Grid2D<T>
 
     /// <summary>
     ///     Transpose the source array into a newly allocated destination array. If the source array is square
-    ///     invoke <see cref="TransposeInPlace" /> isntead to avoid an unnecessary array allocation.
+    ///     invoke <see cref="TransposeInPlace" /> instead to avoid an unnecessary array allocation.
     /// </summary>
     private static T[,] TransposeToArray(T[,] src)
     {
@@ -178,16 +180,14 @@ public sealed partial class Grid2D<T>
     private static class ThrowHelper
     {
         private const string InvalidFlipAxisError = $"{nameof(Grid2D<T>)} can only be flipped about the X and Y axis";
+        private const string InvalidRotAmountError = $"{nameof(Grid2D<T>)} can only be rotated integral multiples of 90 degrees";
 
-        private const string InvalidRotAmountError =
-            $"{nameof(Grid2D<T>)} can only be rotated integral multiples of 90 degrees";
-
-        internal static Exception InvalidFlipAxis(Axis about)
+        internal static ArgumentOutOfRangeException InvalidFlipAxis(Axis about)
         {
             throw new ArgumentOutOfRangeException(nameof(about), about, message: InvalidFlipAxisError);
         }
 
-        internal static Exception InvalidRotationAmount(int amount)
+        internal static ArgumentOutOfRangeException InvalidRotationAmount(int amount)
         {
             throw new ArgumentOutOfRangeException(nameof(amount), amount, message: InvalidRotAmountError);
         }
