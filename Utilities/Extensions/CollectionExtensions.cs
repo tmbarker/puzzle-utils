@@ -156,6 +156,23 @@ public static class CollectionExtensions
         return items.Aggregate(true, (success, item) => set.Add(item) && success);
     }
     
+    public static IEnumerable<T[]> Windows<T>(this IEnumerable<T> source, int size)
+    {
+        var buffer = new Queue<T>(capacity: size);
+        foreach (var item in source)
+        {
+            buffer.Enqueue(item);
+            
+            if (buffer.Count != size)
+            {
+                continue;
+            }
+            
+            yield return buffer.ToArray();
+            buffer.Dequeue();
+        }
+    }
+    
     /// <summary>
     ///     Returns all permutations of the source sequence elements.
     /// </summary>
