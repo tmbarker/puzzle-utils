@@ -150,11 +150,6 @@ public static class CollectionExtensions
             action.Invoke(element);
         }
     }
-
-    public static bool AddRange<T>(this ISet<T> set, IEnumerable<T> items)
-    {
-        return items.Aggregate(true, (success, item) => set.Add(item) && success);
-    }
     
     public static IEnumerable<T[]> Windows<T>(this IEnumerable<T> source, int size)
     {
