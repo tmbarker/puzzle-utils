@@ -77,7 +77,7 @@ public sealed class CircularLinkedList<T>
    {
       if (newNode.List != null)
       {
-         throw new InvalidOperationException($"Cannot insert node, it is already in a {nameof(CircularLinkedList<T>)}");
+         throw new InvalidOperationException($"Cannot insert node, it is already in a {nameof(CircularLinkedList<>)}");
       }
 
       newNode.List = node.List!;
@@ -109,7 +109,7 @@ public sealed class CircularLinkedList<T>
    {
       if (newNode.List != null)
       {
-         throw new InvalidOperationException($"Cannot insert node, it is already in a {nameof(CircularLinkedList<T>)}");
+         throw new InvalidOperationException($"Cannot insert node, it is already in a {nameof(CircularLinkedList<>)}");
       }
 
       newNode.List = node.List!;

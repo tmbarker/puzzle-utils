@@ -179,8 +179,8 @@ public sealed partial class Grid2D<T>
     /// </summary>
     private static class ThrowHelper
     {
-        private const string InvalidFlipAxisError = $"{nameof(Grid2D<T>)} can only be flipped about the X and Y axis";
-        private const string InvalidRotAmountError = $"{nameof(Grid2D<T>)} can only be rotated integral multiples of 90 degrees";
+        private const string InvalidFlipAxisError = $"{nameof(Grid2D<>)} can only be flipped about the X and Y axis";
+        private const string InvalidRotAmountError = $"{nameof(Grid2D<>)} can only be rotated integral multiples of 90 degrees";
 
         internal static ArgumentOutOfRangeException InvalidFlipAxis(Axis about)
         {
