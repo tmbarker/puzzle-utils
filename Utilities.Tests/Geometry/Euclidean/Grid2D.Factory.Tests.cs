@@ -53,7 +53,7 @@ public class Grid2DFactoryTests
         };
 
         // Act
-        var grid = Grid2D<char>.MapChars(strings);
+        var grid = strings.ToGrid();
         var expected = new[,]
         {
             { 'g', 'h', 'i' },

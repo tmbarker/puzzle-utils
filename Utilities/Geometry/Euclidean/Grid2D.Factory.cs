@@ -43,15 +43,18 @@ public sealed partial class Grid2D<T>
 
         return new Grid2D<T>(array, origin);
     }
+}
 
+public static class Grid2DExtensions
+{
     /// <summary>
-    ///     Generate a <see cref="Grid2D{T}" /> instance from an <see cref="IList{T}" /> collection of <see cref="string" />
+    ///     Generate a <see cref="Grid2D{T}" /> instance from an <see cref="IList{T}" /> of <see cref="string" />
     ///     by taking each <see cref="char" /> as an element.
     /// </summary>
     /// <param name="strings">The string collection to populate the returned <see cref="Grid2D{T}" /> instance with</param>
     /// <param name="origin">Which origin should be used</param>
     /// <returns>A populated <see cref="Grid2D{T}" /> instance</returns>
-    public static Grid2D<char> MapChars(IList<string> strings, Origin origin = Origin.Xy)
+    public static Grid2D<char> ToGrid(this IList<string> strings, Origin origin = Origin.Xy)
     {
         return Grid2D<char>.MapChars(strings, elementFunc: c => c, origin);
     }

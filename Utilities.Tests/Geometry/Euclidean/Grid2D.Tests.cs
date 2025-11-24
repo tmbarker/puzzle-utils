@@ -62,7 +62,7 @@ public class Grid2DTests
     {
         // Arrange
         var grid = CreateTestGrid(width: 4, height: 3, Origin.Xy);
-
+        
         // Act & Assert
         Assert.True(grid.Contains(new Vec2D(0, 0)));
         Assert.True(grid.Contains(new Vec2D(3, 2)));
