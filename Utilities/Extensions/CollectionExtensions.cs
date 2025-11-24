@@ -26,14 +26,6 @@ public static class CollectionExtensions
     }
 
     /// <summary>
-    ///     Remove a single element from <paramref name="source" />, if it exists.
-    /// </summary>
-    public static ICollection<T> Except<T>(this IEnumerable<T> source, T single)
-    {
-        return new List<T>(collection: source.Except([single]));
-    }
-
-    /// <summary>
     ///     Find the intersection of multiple collections.
     /// </summary>
     /// <param name="collections">The collections to intersect</param>
@@ -58,20 +50,19 @@ public static class CollectionExtensions
     /// <summary>
     ///     Normalize the values of the collection such that the "smallest" becomes <see cref="Vec2D.Zero" />.
     /// </summary>
-    public static IEnumerable<Vec2D> Normalize(this IEnumerable<Vec2D> collection)
+    public static IEnumerable<Vec2D> Normalize(this ICollection<Vec2D> collection)
     {
-        var enumerated = collection.ToList();
         var dx = int.MaxValue;
         var dy = int.MaxValue;
 
-        foreach (var vector in enumerated)
+        foreach (var vector in collection)
         {
             dx = Math.Min(dx, vector.X);
             dy = Math.Min(dy, vector.Y);
         }
 
         var delta = new Vec2D(dx, dy);
-        foreach (var vector in enumerated)
+        foreach (var vector in collection)
         {
             yield return vector - delta;
         }
