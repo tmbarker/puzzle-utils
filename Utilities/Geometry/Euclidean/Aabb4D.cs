@@ -9,12 +9,22 @@ public readonly record struct Aabb4D : IEnumerable<Vec4D>
 {
     public Aabb4D(Vec4D min, Vec4D max)
     {
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.X, max.X);
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.Y, max.Y);
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.Z, max.Z);
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.W, max.W);
+        
         Min = min;
         Max = max;
     }
 
     public Aabb4D(int xMin, int xMax, int yMin, int yMax, int zMin, int zMax, int wMin, int wMax)
     {
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(xMin, xMax);
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(yMin, yMax);
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(zMin, zMax);
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(wMin, wMax);
+        
         Min = new Vec4D(xMin, yMin, zMin, wMin);
         Max = new Vec4D(xMax, yMax, zMax, wMax);
     }

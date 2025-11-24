@@ -64,13 +64,13 @@ public readonly record struct Vec3D(int X, int Y, int Z)
     {
         return metric switch
         {
-            Metric.Chebyshev => GetChebyshevAdjacentSet(),
-            Metric.Taxicab => GetTaxicabAdjacentSet(),
+            Metric.Chebyshev => GetChebyshevAdjacent(),
+            Metric.Taxicab => GetTaxicabAdjacent(),
             _ => throw VecThrowHelper.InvalidMetric<Vec3D>(metric)
         };
     }
     
-    private HashSet<Vec3D> GetTaxicabAdjacentSet()
+    public HashSet<Vec3D> GetTaxicabAdjacent()
     {
         return
         [
@@ -83,7 +83,7 @@ public readonly record struct Vec3D(int X, int Y, int Z)
         ];
     }
     
-    private HashSet<Vec3D> GetChebyshevAdjacentSet()
+    public HashSet<Vec3D> GetChebyshevAdjacent()
     {
         var set = new HashSet<Vec3D>();
         
@@ -101,7 +101,7 @@ public readonly record struct Vec3D(int X, int Y, int Z)
         return set;
     }
     
-    private static int ChebyshevDistance(Vec3D a, Vec3D b)
+    public static int ChebyshevDistance(Vec3D a, Vec3D b)
     {
         var dx = Math.Abs(a.X - b.X);
         var dy = Math.Abs(a.Y - b.Y);
@@ -110,7 +110,7 @@ public readonly record struct Vec3D(int X, int Y, int Z)
         return Math.Max(dx, Math.Max(dy, dz));
     }
 
-    private static int TaxicabDistance(Vec3D a, Vec3D b)
+    public static int TaxicabDistance(Vec3D a, Vec3D b)
     {
         var dx = Math.Abs(a.X - b.X);
         var dy = Math.Abs(a.Y - b.Y);

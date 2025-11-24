@@ -9,12 +9,20 @@ public readonly record struct Aabb3D : IEnumerable<Vec3D>
 {
     public Aabb3D(Vec3D min, Vec3D max)
     {
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.X, max.X);
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.Y, max.Y);
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.Z, max.Z);
+        
         Min = min;
         Max = max;
     }
 
     public Aabb3D(int xMin, int xMax, int yMin, int yMax, int zMin, int zMax)
     {
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(xMin, xMax);
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(yMin, yMax);
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(zMin, zMax);
+        
         Min = new Vec3D(xMin, yMin, zMin);
         Max = new Vec3D(xMax, yMax, zMax);
     }

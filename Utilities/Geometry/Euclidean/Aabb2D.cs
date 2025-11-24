@@ -9,12 +9,18 @@ public readonly record struct Aabb2D : IEnumerable<Vec2D>
 {
     public Aabb2D(Vec2D min, Vec2D max)
     {
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.X, max.X);
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.Y, max.Y);
+        
         Min = min;
         Max = max;
     }
 
     public Aabb2D(int xMin, int xMax, int yMin, int yMax)
     {
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(xMin, xMax);
+        AabbThrowHelper.ThrowIfMinGreaterThanMax(yMin, yMax);
+        
         Min = new Vec2D(xMin, yMin);
         Max = new Vec2D(xMax, yMax);
     }

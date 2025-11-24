@@ -3,7 +3,7 @@ namespace Utilities.Geometry.Euclidean;
 /// <summary>
 ///     Helper methods for throwing common Vector exceptions.
 /// </summary>
-public static class VecThrowHelper
+internal static class VecThrowHelper
 {
     /// <summary>
     ///     Throws an <see cref="ArgumentException"/> for invalid component access.

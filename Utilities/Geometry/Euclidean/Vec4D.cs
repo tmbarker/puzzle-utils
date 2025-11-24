@@ -43,7 +43,7 @@ public readonly record struct Vec4D(int X, int Y, int Z, int W)
         return $"<{X},{Y},{Z},{W}>";
     }
     
-    private static int ChebyshevDistance(Vec4D a, Vec4D b)
+    public static int ChebyshevDistance(Vec4D a, Vec4D b)
     {
         var dx = Math.Abs(a.X - b.X);
         var dy = Math.Abs(a.Y - b.Y);
@@ -53,7 +53,7 @@ public readonly record struct Vec4D(int X, int Y, int Z, int W)
         return Math.Max(dx, Math.Max(dy, Math.Max(dz, dw)));
     }
 
-    private static int TaxicabDistance(Vec4D a, Vec4D b)
+    public static int TaxicabDistance(Vec4D a, Vec4D b)
     {
         var dx = Math.Abs(a.X - b.X);
         var dy = Math.Abs(a.Y - b.Y);
@@ -72,13 +72,13 @@ public readonly record struct Vec4D(int X, int Y, int Z, int W)
     {
         return metric switch
         {
-            Metric.Chebyshev => GetChebyshevAdjacentSet(),
-            Metric.Taxicab => GetTaxicabAdjacentSet(),
+            Metric.Chebyshev => GetChebyshevAdjacent(),
+            Metric.Taxicab => GetTaxicabAdjacent(),
             _ => throw VecThrowHelper.InvalidMetric<Vec4D>(metric)
         };
     }
     
-    private HashSet<Vec4D> GetTaxicabAdjacentSet()
+    public HashSet<Vec4D> GetTaxicabAdjacent()
     {
         return
         [
@@ -93,7 +93,7 @@ public readonly record struct Vec4D(int X, int Y, int Z, int W)
         ];
     }
     
-    private HashSet<Vec4D> GetChebyshevAdjacentSet()
+    public HashSet<Vec4D> GetChebyshevAdjacent()
     {
         var set = new HashSet<Vec4D>();
         
