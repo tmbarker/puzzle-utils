@@ -89,8 +89,8 @@ public static class CollectionExtensions
     ///     then <paramref name="takePredicate" /> is used and negated
     /// </param>
     /// <typeparam name="T">The type associated with each element in the source</typeparam>
-    /// <returns>An iterator which yields chunk arrays</returns>
-    public static IList<T[]> ChunkBy<T>(this IEnumerable<T> source, Predicate<T> takePredicate,
+    /// <returns>A collection of arrays</returns>
+    public static List<T[]> ChunkBy<T>(this IEnumerable<T> source, Predicate<T> takePredicate,
         Predicate<T>? skipPredicate = null)
     {
         var chunks = new List<T[]>();
@@ -122,8 +122,8 @@ public static class CollectionExtensions
     ///     Chunk the source between null or whitespace strings.
     /// </summary>
     /// <param name="source">The source collection</param>
-    /// <returns>An iterator which yields chunk arrays</returns>
-    public static IList<string[]> ChunkByNonEmpty(this IEnumerable<string> source)
+    /// <returns>A collection of chunk arrays</returns>
+    public static List<string[]> ChunkByNonEmpty(this IEnumerable<string> source)
     {
         return source.ChunkBy(takePredicate: s => !string.IsNullOrWhiteSpace(s));
     }
