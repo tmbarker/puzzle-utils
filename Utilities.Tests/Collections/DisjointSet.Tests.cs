@@ -20,7 +20,7 @@ public sealed class DisjointSetTests
         Assert.True(result);
         Assert.True(disjointSet.ContainsElement(1));
         Assert.Equal(1, disjointSet.ElementsCount);
-        Assert.Equal(1, disjointSet.PartitionsCount);
+        Assert.Equal(1, disjointSet.ComponentsCount);
     }
 
     [Fact]
@@ -36,7 +36,7 @@ public sealed class DisjointSetTests
         // Assert
         Assert.False(result);
         Assert.Equal(1, disjointSet.ElementsCount);
-        Assert.Equal(1, disjointSet.PartitionsCount);
+        Assert.Equal(1, disjointSet.ComponentsCount);
     }
 
     [Fact]
@@ -52,7 +52,7 @@ public sealed class DisjointSetTests
 
         // Assert
         Assert.True(result);
-        Assert.Equal(1, disjointSet.PartitionsCount);
+        Assert.Equal(1, disjointSet.ComponentsCount);
         Assert.Equal(disjointSet.FindSet(element: 1), disjointSet.FindSet(element: 2));
     }
 
@@ -70,7 +70,7 @@ public sealed class DisjointSetTests
 
         // Assert
         Assert.False(result);
-        Assert.Equal(1, disjointSet.PartitionsCount);
+        Assert.Equal(1, disjointSet.ComponentsCount);
     }
 
     [Fact]
@@ -135,7 +135,7 @@ public sealed class DisjointSetTests
 
         // Assert
         Assert.Equal(0, disjointSet.ElementsCount);
-        Assert.Equal(0, disjointSet.PartitionsCount);
+        Assert.Equal(0, disjointSet.ComponentsCount);
         Assert.False(disjointSet.ContainsElement(1));
         Assert.False(disjointSet.ContainsElement(2));
     }

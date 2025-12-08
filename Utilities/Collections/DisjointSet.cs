@@ -17,7 +17,7 @@ public sealed class DisjointSet<T> where T : IEquatable<T>
     /// <summary>
     ///     The number of partitions (components) in the set.
     /// </summary>
-    public int PartitionsCount { get; private set; }
+    public int ComponentsCount { get; private set; }
 
     /// <summary>
     ///     Initialize an empty <see cref="DisjointSet{T}"/>.
@@ -65,7 +65,7 @@ public sealed class DisjointSet<T> where T : IEquatable<T>
         }
 
         _nodes[element] = new DisjointSetNode<T>(element);
-        PartitionsCount++;
+        ComponentsCount++;
         return true;
     }
 
@@ -99,7 +99,7 @@ public sealed class DisjointSet<T> where T : IEquatable<T>
             parentA.Parent = parentB;
         }
 
-        PartitionsCount--;
+        ComponentsCount--;
         return true;
     }
 
@@ -113,13 +113,20 @@ public sealed class DisjointSet<T> where T : IEquatable<T>
         return FindSet(_nodes[element]).Element;
     }
 
+    public IEnumerable<HashSet<T>> GetComponents()
+    {
+        return _nodes.Keys
+            .GroupBy(FindSet)
+            .Select(component => new HashSet<T>(component));
+    }
+    
     /// <summary>
     ///     Clear all nodes from the set.
     /// </summary>
     public void Clear()
     {
         _nodes.Clear();
-        PartitionsCount = 0;
+        ComponentsCount = 0;
     }
 
     private static DisjointSetNode<T> FindSet(DisjointSetNode<T> node)
