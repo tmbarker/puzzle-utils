@@ -7,15 +7,12 @@ namespace Utilities.Geometry.Euclidean;
 /// </summary>
 public readonly record struct Aabb4D : IEnumerable<Vec4D>
 {
-    public Aabb4D(Vec4D min, Vec4D max)
+    public Aabb4D(Vec4D v1, Vec4D v2) : this(
+        xMin: Math.Min(v1.X, v2.X), xMax: Math.Max(v1.X, v2.X),
+        yMin: Math.Min(v1.Y, v2.Y), yMax: Math.Max(v1.Y, v2.Y),
+        zMin: Math.Min(v1.Z, v2.Z), zMax: Math.Max(v1.Z, v2.Z),
+        wMin: Math.Min(v1.W, v2.W), wMax: Math.Max(v1.W, v2.W))
     {
-        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.X, max.X);
-        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.Y, max.Y);
-        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.Z, max.Z);
-        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.W, max.W);
-        
-        Min = min;
-        Max = max;
     }
 
     public Aabb4D(int xMin, int xMax, int yMin, int yMax, int zMin, int zMax, int wMin, int wMax)

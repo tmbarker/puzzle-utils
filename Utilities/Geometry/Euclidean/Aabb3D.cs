@@ -7,14 +7,11 @@ namespace Utilities.Geometry.Euclidean;
 /// </summary>
 public readonly record struct Aabb3D : IEnumerable<Vec3D>
 {
-    public Aabb3D(Vec3D min, Vec3D max)
+    public Aabb3D(Vec3D v1, Vec3D v2) : this(
+        xMin: Math.Min(v1.X, v2.X), xMax: Math.Max(v1.X, v2.X),
+        yMin: Math.Min(v1.Y, v2.Y), yMax: Math.Max(v1.Y, v2.Y),
+        zMin: Math.Min(v1.Z, v2.Z), zMax: Math.Max(v1.Z, v2.Z))
     {
-        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.X, max.X);
-        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.Y, max.Y);
-        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.Z, max.Z);
-        
-        Min = min;
-        Max = max;
     }
 
     public Aabb3D(int xMin, int xMax, int yMin, int yMax, int zMin, int zMax)
@@ -74,7 +71,7 @@ public readonly record struct Aabb3D : IEnumerable<Vec3D>
 
     public Aabb3D Shift(Vec3D amount)
     {
-        return new Aabb3D(min: Min + amount, max: Max + amount);
+        return new Aabb3D(v1: Min + amount, v2: Max + amount);
     }
 
     public long GetSurfaceArea()

@@ -7,13 +7,10 @@ namespace Utilities.Geometry.Euclidean;
 /// </summary>
 public readonly record struct Aabb2D : IEnumerable<Vec2D>
 {
-    public Aabb2D(Vec2D min, Vec2D max)
+    public Aabb2D(Vec2D v1, Vec2D v2) : this(
+        xMin: Math.Min(v1.X, v2.X), xMax: Math.Max(v1.X, v2.X),
+        yMin: Math.Min(v1.Y, v2.Y), yMax: Math.Max(v1.Y, v2.Y))
     {
-        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.X, max.X);
-        AabbThrowHelper.ThrowIfMinGreaterThanMax(min.Y, max.Y);
-        
-        Min = min;
-        Max = max;
     }
 
     public Aabb2D(int xMin, int xMax, int yMin, int yMax)
@@ -62,7 +59,7 @@ public readonly record struct Aabb2D : IEnumerable<Vec2D>
             yMax: int.Min(a.Max.Y, b.Max.Y));
         return true;
     }
-
+    
     public bool Contains(Vec2D pos, bool inclusive)
     {
         return inclusive
@@ -70,14 +67,14 @@ public readonly record struct Aabb2D : IEnumerable<Vec2D>
             : ContainsExclusive(pos);
     }
 
-    private bool ContainsInclusive(Vec2D pos)
+    public bool ContainsInclusive(Vec2D pos)
     {
         return
             pos.X >= Min.X && pos.X <= Max.X &&
             pos.Y >= Min.Y && pos.Y <= Max.Y;
     }
 
-    private bool ContainsExclusive(Vec2D pos)
+    public bool ContainsExclusive(Vec2D pos)
     {
         return
             pos.X > Min.X && pos.X < Max.X &&
@@ -143,8 +140,8 @@ public readonly record struct Aabb2D : IEnumerable<Vec2D>
         }
 
         return new Aabb2D(
-            min: Min - amount * Vec2D.One,
-            max: Max + amount * Vec2D.One);
+            v1: Min - amount * Vec2D.One,
+            v2: Max + amount * Vec2D.One);
     }
 
     private Aabb2D Contract(int amount)
@@ -168,8 +165,8 @@ public readonly record struct Aabb2D : IEnumerable<Vec2D>
         }
 
         return new Aabb2D(
-            min: Min + amount * Vec2D.One,
-            max: Max - amount * Vec2D.One);
+            v1: Min + amount * Vec2D.One,
+            v2: Max - amount * Vec2D.One);
     }
 
     public override string ToString()
